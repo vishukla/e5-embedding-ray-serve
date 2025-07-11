@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'ray-serve-app'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['ray-embedding-server:8000']
+
+  - job_name: 'dcgm'
+    static_configs:
+      - targets: ['dcgm-exporter:9400']

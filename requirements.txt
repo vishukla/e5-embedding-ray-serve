@@ -1,0 +1,8 @@
+fastapi
+numpy
+prometheus_fastapi_instrumentator
+pydantic
+pytest
+ray[serve]
+sentence-transformers
+uvicorn
