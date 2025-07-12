@@ -1,10 +1,15 @@
 # E5 Embeddings API Server with Ray Serve
 
-![Python](https://img.shields.io/badge/python-3.10-blue)
-![Ray](https://img.shields.io/badge/ray-2.x-orange)
-![FastAPI](https://img.shields.io/badge/fastapi-0.95-green)
-![License](https://img.shields.io/badge/license-MIT-lightgrey)
-
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.10-blue" alt="Python">
+  <img src="https://img.shields.io/badge/Framework-FastAPI-green?logo=fastapi" alt="FastAPI">
+  <img src="https://img.shields.io/badge/Orchestration-Ray%20Serve-blue?logo=ray" alt="Ray Serve">
+  <img src="https://img.shields.io/badge/Embeddings-SentenceTransformers-yellow?logo=python" alt="SentenceTransformers">
+  <img src="https://img.shields.io/badge/Monitoring-Prometheus-orange?logo=prometheus" alt="Prometheus">
+  <img src="https://img.shields.io/badge/Dashboard-Grafana-orange?logo=grafana" alt="Grafana">
+  <img src="https://img.shields.io/badge/GPU-Ready-green?logo=nvidia" alt="GPU Ready">
+  <img src="https://img.shields.io/badge/License-MIT-blue" alt="MIT License">
+</p>
 
 ## Overview
 
@@ -246,6 +251,42 @@ ray-embed-serve/
 ├── requirements.txt
 └── README.md
 ```
+
+## Troubleshooting
+
+You would need **NVIDIA Container Toolkit** installed to enable Docker to use the GPU. 
+You may also need to update the default runtime at `/etc/docker/daemon.json` to
+```json
+{
+    "default-runtime": "nvidia",
+    "runtimes": {
+        "nvidia": {
+            "args": [],
+            "path": "/usr/bin/nvidia-container-runtime"
+        }
+    }
+}
+```
+and then restart Docker service.
+```bash
+sudo systemctl restart docker
+```
+
+You may configure the GPU allocation by adding or removing the following code segments:
+
+In `docker-compose.yml`:
+```
+services:
+  ray-embed-server:
+    ...
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+```
+
+In `app/serve_app.py`, by updating `ray_actor_options={"num_gpus": 1}`.
 
 
 ## License
