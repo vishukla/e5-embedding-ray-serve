@@ -246,6 +246,7 @@ pytest tests/test_api.py -v
 * Grafana dashboards can be set up with provided configs in `monitoring/grafana-provisioning/`
 * Ray Dashboard available on port `8265` for cluster health, resource utilization, and request tracing
 
+
 - **Ray Serve Dashboard:** [http://localhost:8265](http://localhost:8265)  
   Track replica scaling, request queues, latency, errors, and resource utilization.
 
