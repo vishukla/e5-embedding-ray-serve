@@ -167,6 +167,12 @@ curl -X POST "http://localhost:8000/embeddings/search" \
 GET /health
 ```
 
+**Example:**
+
+```bash
+curl -X GET "http://localhost:8000/health"
+```
+
 Returns:
 
 ```json
@@ -234,7 +240,7 @@ docker-compose up -d
 ## Repository Structure
 
 ```
-ray-embed-serve/
+e5-embedding-ray-serve/
 ├── app/
 │   └── serve_app.py               # API & Ray Serve deployment
 ├── monitoring/
@@ -255,7 +261,7 @@ ray-embed-serve/
 ## Troubleshooting
 
 You would need **NVIDIA Container Toolkit** installed to enable Docker to use the GPU. 
-You may also need to update the default runtime at `/etc/docker/daemon.json` to
+You may also need to update the default runtime in `/etc/docker/daemon.json` with
 ```json
 {
     "default-runtime": "nvidia",
