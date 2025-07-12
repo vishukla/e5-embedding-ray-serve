@@ -30,7 +30,7 @@ def compute_cosine_similarity(vec1: np.ndarray, vec2: np.ndarray) -> float:
 app = FastAPI(title="E5 Embeddings API Server with Ray Serve")
 
 @serve.deployment(
-    # ray_actor_options={"num_gpus": 1}, # each replica would require this number of gpus
+    # ray_actor_options={"num_gpus": 1},  # each replica would require this number of gpus
     autoscaling_config = {
         "min_replicas": 1,
         "max_replicas": 10,
@@ -41,7 +41,8 @@ app = FastAPI(title="E5 Embeddings API Server with Ray Serve")
         "downscaling_factor": 0.3,
         "metrics_interval_s": 2,
         "look_back_period_s": 10
-    }
+    },
+    max_ongoing_requests=40
 )
 @serve.ingress(app)
 class EmbeddingServer:

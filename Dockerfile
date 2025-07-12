@@ -12,6 +12,7 @@ COPY entrypoint.sh .
 RUN chmod +x /app/entrypoint.sh
 
 COPY app .
+COPY tests/ ./tests/
 
 EXPOSE 8000 8265 6379
 

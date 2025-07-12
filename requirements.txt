@@ -1,5 +1,7 @@
+aiohttp
 fastapi
 httpx
+locust
 numpy
 prometheus_fastapi_instrumentator
 pydantic
