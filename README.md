@@ -36,24 +36,25 @@ The API is implemented with:
 
 ## Why Use This API Server?
 
-This API server offers a powerful, scalable, and cost-effective alternative to relying on hosted text embedding APIs like OpenAI’s embedding service. Here are the key benefits:
+This API server offers a powerful, scalable, and cost-effective alternative to relying on hosted text embedding APIs like OpenAI’s embedding service. 
+Here are the key benefits:
 
-### 1. Overcome Rate Limits and Latency Bottlenecks
+#### 1. Overcome Rate Limits and Latency Bottlenecks
 - Hosted APIs have strict rate limits that can throttle throughput.
 - This server uses Ray Serve autoscaling to handle **high concurrency** and **large request volumes** without external API restrictions.
 - Embeddings are generated locally or in your cloud environment, reducing latency.
 
-### 2. Cost-Effective at Scale
+#### 2. Cost-Effective at Scale
 - Hosted embedding APIs charge per request, which can get expensive with millions of calls.
 - Running your own embedding model (e.g., `intfloat/multilingual-e5-base`) on GPUs reduces costs.
 - Autoscaling helps optimize resource usage and spending.
 
-### 3. Greater Control and Customization
+#### 3. Greater Control and Customization
 - Choose and update your embedding model anytime without waiting for third-party API updates.
 - Customize preprocessing or postprocessing as needed.
 - Integrate seamlessly with monitoring tools like Prometheus, Grafana, and Ray Dashboard.
 
-### 4. Privacy and Data Security
+#### 4. Privacy and Data Security
 - Keep sensitive or proprietary text in your own environment.
 - Avoid sending data to third-party services, ensuring better compliance and data protection.
 
@@ -245,13 +246,13 @@ pytest tests/test_api.py -v
 * Grafana dashboards can be set up with provided configs in `monitoring/grafana-provisioning/`
 * Ray Dashboard available on port `8265` for cluster health, resource utilization, and request tracing
 
-- **🔹 Ray Serve Dashboard:** [http://localhost:8265](http://localhost:8265)  
+- ** Ray Serve Dashboard:** [http://localhost:8265](http://localhost:8265)  
   Track replica scaling, request queues, latency, errors, and resource utilization.
 
-- **🔹 Prometheus Dashboard:** [http://localhost:9090](http://localhost:9090)  
+- ** Prometheus Dashboard:** [http://localhost:9090](http://localhost:9090)  
   Explore raw metrics and PromQL queries.
 
-- **🔹 Grafana Dashboard:** [http://localhost:3000](http://localhost:3000)  
+- ** Grafana Dashboard:** [http://localhost:3000](http://localhost:3000)  
   Visual dashboards for Requests Per Minute (RPM), QPS, Latency (P95, P99), Error Rates, CPU/GPU Utilization
 
 
