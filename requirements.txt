@@ -7,5 +7,6 @@ prometheus_fastapi_instrumentator
 pydantic
 pytest
 ray[serve]
+redis
 sentence-transformers
 uvicorn

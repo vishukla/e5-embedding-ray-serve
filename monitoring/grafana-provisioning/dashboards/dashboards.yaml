@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: 'ray-serve-dashboards'
+    orgId: 1
+    folder: ''          # Root folder in Grafana
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /etc/grafana/provisioning/dashboards

@@ -6,10 +6,13 @@ services:
     container_name: ray-embedding-server
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     ports:
       - "8000:8000"   # Serve HTTP API
       - "8265:8265"   # Ray dashboard
       - "6379:6379"   # Ray cluster port
+      - "8080:8080"   # Ray metrics endpoint
     deploy:
       resources:
         reservations:
@@ -17,10 +20,21 @@ services:
             - driver: nvidia
               count: -1
               capabilities: [gpu]
+    depends_on:
+      - redis
 
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    ports:
+      - "6380:6379"  # Host 6380 -> Container 6379 to avoid Ray cluster port collision
+    volumes:
+      - redis-data:/data
+    command: ["redis-server", "--appendonly", "yes"]
 
   prometheus:
     image: prom/prometheus
+    container_name: prometheus
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
@@ -28,6 +42,7 @@ services:
 
   grafana:
     image: grafana/grafana
+    container_name: grafana
     ports:
       - "3000:3000"
     volumes:
@@ -36,6 +51,15 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     depends_on:
       - prometheus
+
+  redis-exporter:
+    image: oliver006/redis_exporter:latest
+    ports:
+      - "9121:9121"
+    environment:
+      - REDIS_ADDR=redis:6379
+    depends_on:
+      - redis
 
   dcgm-exporter:
     image: nvidia/dcgm-exporter:latest
@@ -52,3 +76,6 @@ services:
               capabilities: [gpu]
     cap_add:
     - SYS_ADMIN
+
+volumes:
+  redis-data:

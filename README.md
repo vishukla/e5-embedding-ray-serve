@@ -7,6 +7,7 @@
   <img src="https://img.shields.io/badge/Embeddings-SentenceTransformers-yellow?logo=python" alt="SentenceTransformers">
   <img src="https://img.shields.io/badge/Monitoring-Prometheus-orange?logo=prometheus" alt="Prometheus">
   <img src="https://img.shields.io/badge/Dashboard-Grafana-orange?logo=grafana" alt="Grafana">
+  <img src="https://img.shields.io/badge/Caching-Redis-red?logo=redis" alt="Redis">
   <img src="https://img.shields.io/badge/GPU-Ready-green?logo=nvidia" alt="GPU Ready">
   <img src="https://img.shields.io/badge/License-MIT-blue" alt="MIT License">
 </p>
@@ -19,6 +20,7 @@ The API is implemented with:
 
 * **FastAPI** for HTTP endpoints
 * **Ray Serve** for scalable model serving and orchestration
+* **Redis** for caching to reduce redundant computations and improve latency
 * **Prometheus + Grafana** for monitoring and observability
 
 
@@ -81,6 +83,7 @@ By deploying this API server, you gain full control, scalability, and cost effic
 * Python 3.10+
 * [Ray](https://docs.ray.io/en/latest/)
 * [FastAPI](https://fastapi.tiangolo.com/)
+* [Redis](https://redis.io/)
 * [sentence-transformers](https://www.sbert.net/)
 * [Prometheus FastAPI Instrumentator](https://github.com/trallnag/prometheus-fastapi-instrumentator)
 
@@ -239,6 +242,12 @@ You can also run automated tests (if implemented):
 pytest tests/test_api.py -v
 ```
 
+Run locust for performance testing:
+
+```bash
+locust -f tests/stress/locust_test.py --host=http://localhost:8000
+```
+
 
 ## Monitoring & Observability
 
@@ -246,6 +255,7 @@ pytest tests/test_api.py -v
 * Grafana dashboards can be set up with provided configs in `monitoring/grafana-provisioning/`
 * Ray Dashboard available on port `8265` for cluster health, resource utilization, and request tracing
 
+### Dashboards
 
 - **Ray Serve Dashboard:** [http://localhost:8265](http://localhost:8265)  
   Track replica scaling, request queues, latency, errors, and resource utilization.
